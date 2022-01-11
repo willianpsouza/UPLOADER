@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI instance to serve ApiUPLOADER
+After=network.target
+
+[Service]
+User=webuser
+Group=www-data
+
+WorkingDirectory=/home/webuser/UPLOADER
+Environment="PATH=/home/webuser/UPLOADER/bin"
+ExecStart=/home/webuser/UPLOADER/bin/uwsgi --ini UPLOADER.ini
+
+[Install]
+WantedBy=multi-user.target
