@@ -36,8 +36,7 @@ CURL EXAMPLE:
 
 '''
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
-UPLOAD_FOLDER = '/home/willian_pires/Programas/python3/UPLOADER/UPDATA'
+UPLOAD_FOLDER = './UPDATA/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','mp3','mp4','iso'}
 FILE_SIZE = 512  #512MB para testes locais
 
@@ -60,6 +59,13 @@ def search_files(search,tp='auth_key'):
             elif tp == 'uuid' and search == suuid:
                 files.append(file)
     return files
+
+def check_store_dir():
+    if os.path.isdir(app.config['UPLOAD_FOLDER']):
+        return True
+    else:
+        os.mkdir(app.config['UPLOAD_FOLDER'])
+        return True
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
@@ -119,4 +125,5 @@ def main():
     return Response(dumps({}),mimetype='application/javascript')
 
 if __name__ == "__main__":
+    check_store_dir()
     app.run(host='0.0.0.0',debug=True)
