@@ -31,6 +31,9 @@ CURL EXAMPLE:
     md5sum jose.iso             35cef6acb18dfda014710f3cb8520794  jose.iso
     md5sum NetBSD-9.2-amd64.iso 35cef6acb18dfda014710f3cb8520794  NetBSD-9.2-amd64.iso
 
+
+    curl -X POST -F 'erase=yes' -F 'uuid=ef31fa1f-fb2b-4d99-b049-b2722a11076c' http://127.0.0.1:5000                                  #-- Apagando o arquivo
+
 '''
 
 UPLOAD_FOLDER = '/path/to/the/uploads'
