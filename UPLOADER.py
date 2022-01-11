@@ -78,9 +78,18 @@ def main():
             if len(request.form['auth_key']) == 32:
                 auth_key = request.form['auth_key']
 
+        if  'uuid' in request.form.keys() and 'erase' in request.form.keys():
+            files = search_files(search_uuid,'uuid')
+            if len(files) == 1:
+                os.unlink(os.path.join(app.config['UPLOAD_FOLDER'],files[0]))
+                ret['status'] = 'DELETED'
+                ret['file'] = files[0]
+                return Response(dumps(ret),mimetype='application/javascript')
+
         if 'file' not in request.files:
             if auth_key:
                 files = search_files(auth_key)
+
             if search_uuid:
                 files = search_files(search_uuid,'uuid')
                 if len(files) == 1:
