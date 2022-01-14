@@ -54,6 +54,7 @@ def search_files(search,tp='auth_key'):
     for r, d, f in os.walk(UPLOAD_FOLDER):
         for file in f:
             (auth_key,suuid,size,filename) = file.split('^')
+
             if tp == 'auth_key' and search == auth_key:
                 files.append(file)
             elif tp == 'uuid' and search == suuid:
